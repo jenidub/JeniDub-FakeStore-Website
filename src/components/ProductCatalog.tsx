@@ -28,7 +28,7 @@ function ProductCatalog () {
        if (eventKey) setSelectedCategory(eventKey);
     }
 
-    const filteredProducts = selectedCategory === "all" ?
+    const filteredProducts = selectedCategory === "All" ?
         data :
         data?.filter(product => product.category === selectedCategory)
 
@@ -54,6 +54,7 @@ function ProductCatalog () {
                             <Card style={{height: "600px"}}>
                                 <img src={product.image} alt={`${product.title} product image`} style={{margin: "0 auto", width: "50px", }}/>
                                 <h4>{product.title}</h4>
+                                <h5><em>Product ID: #{product.id}</em></h5>
                                 <p><b>${product.price.toFixed(2)}</b></p>
                                 <p>{product.description}</p>
                                 <Button>Add to Shopping Cart</Button>
