@@ -57,7 +57,9 @@ function ProductCatalog () {
                                 <h5><em>Product ID: #{product.id}</em></h5>
                                 <p><b>${product.price.toFixed(2)}</b></p>
                                 <p>{product.description}</p>
-                                <Button>Add to Shopping Cart</Button>
+                                <Button>
+                                    Add to Shopping Cart
+                                </Button>
                             </Card>
                         </Col>
                     ))}
