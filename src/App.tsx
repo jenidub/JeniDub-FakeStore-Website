@@ -1,22 +1,34 @@
-//import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes } from "react-router-dom";
 import ProductCatalog from "./components/ProductCatalog";
 import ShoppingCart from "./components/ShoppingCart";
+import ShoppingCartContext from "./context/ShoppingCartContext";
+// import type { Product } from "./types/Product";
 import './App.css'
 
 function App() {
-//   const [count, setCount] = useState(0)
+    const [ shoppingCart, setShoppingCart ] = useState(() => {
+        const currentCart = window.sessionStorage.getItem('shoppingCart') || "";
 
-  return (
-    <Routes>
-        <Route path="/" element={<ProductCatalog />} />
-        <Route path="/cart" element={<ShoppingCart />} />
+        if (currentCart && currentCart !== "undefined" && currentCart !== "null") {
+            return JSON.parse(currentCart)
+        }
+        return [];
+    });
 
-        {/* <Route path="/dashboard" element={<AuthenticationGuard component={TaskDashboard} />} /> */}
-        {/* <Route path="/profile" element={<AuthenticationGuard component={ProfilePage} />} /> */}
-        {/* <Route path="/callback" element={<CallbackPage />} /> */}
-    </Routes>
-  )
+    useEffect(() => {
+        console.log("updating cart...")
+        window.sessionStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+    }, [shoppingCart]);
+
+    return (
+        <ShoppingCartContext.Provider value={{ shoppingCart, setShoppingCart }}>
+            <Routes>
+                <Route path="/" element={<ProductCatalog />} />
+                <Route path="/cart" element={<ShoppingCart />} />
+            </Routes>
+        </ShoppingCartContext.Provider> 
+    )
 }
 
-export default App
+export default App;

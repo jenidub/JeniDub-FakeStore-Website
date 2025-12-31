@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { Dropdown, DropdownButton, Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Dropdown, DropdownButton, Container, Row, Col } from "react-bootstrap";
 import type { Product } from "../types/Product";
+import ShoppingCartContext from "../context/ShoppingCartContext";
+import ProductCard from "./ProductCard";
 
 // Fetch function
 const fetchProducts = async (): Promise<Product[]> => {
@@ -11,6 +13,8 @@ const fetchProducts = async (): Promise<Product[]> => {
 };
 
 function ProductCatalog () {
+    const { shoppingCart } = useContext(ShoppingCartContext);
+    console.log("shoppingCart: ", shoppingCart);
     const [ selectedCategory, setSelectedCategory ] = useState("All");
 
     const { data, isLoading, error } = useQuery<Product[]>({
@@ -19,7 +23,7 @@ function ProductCatalog () {
     });
 
     if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>Error loading posts</p>;
+    if (error) return <p>Error loading products</p>;
 
     // TODO: Make all cateogries title case then sort
     const availableCategories = ["All", ... new Set(data?.map(product => product.category))];
@@ -50,17 +54,8 @@ function ProductCatalog () {
             <Container style={{textAlign: "center",}}>
                 <Row md={3} style={{}}>
                     {filteredProducts?.map(product => (
-                        <Col>
-                            <Card style={{height: "600px"}}>
-                                <img src={product.image} alt={`${product.title} product image`} style={{margin: "0 auto", width: "50px", }}/>
-                                <h4>{product.title}</h4>
-                                <h5><em>Product ID: #{product.id}</em></h5>
-                                <p><b>${product.price.toFixed(2)}</b></p>
-                                <p>{product.description}</p>
-                                <Button>
-                                    Add to Shopping Cart
-                                </Button>
-                            </Card>
+                        <Col key={product.id}>
+                            <ProductCard {...product} />
                         </Col>
                     ))}
                 </Row>
