@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Dropdown, DropdownButton, Container, Row, Col } from "react-bootstrap";
 import type { Product } from "../types/Product";
 import ShoppingCartContext from "../context/ShoppingCartContext";
+import MenuBar from "./MenuBar";
 import ProductCard from "./ProductCard";
 
 // Fetch function
@@ -38,6 +39,7 @@ function ProductCatalog () {
 
     return (
         <div>
+            <MenuBar />
             <h1>JeniDub Store Catalog</h1>
             <p>Check out the offerings we have for our after Christmas sale</p>
             <DropdownButton
