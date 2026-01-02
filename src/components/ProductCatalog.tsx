@@ -61,7 +61,6 @@ function ProductCatalog () {
                         </Col>
                     ))}
                 </Row>
-
             </Container>
         </div>
     )

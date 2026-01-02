@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import ProductCatalog from "./components/ProductCatalog";
 import ShoppingCart from "./components/ShoppingCart";
 import ShoppingCartContext from "./context/ShoppingCartContext";
-// import type { Product } from "./types/Product";
+import type { Product } from "./types/Product";
 import './App.css'
 
 function App() {
@@ -16,13 +16,18 @@ function App() {
         return [];
     });
 
+    const [ totalCost, setTotalCost ] = useState(
+        shoppingCart.reduce((accumulator: number, currentProduct: Product) => {
+            return accumulator + currentProduct.price;
+        }, 0)
+    );
+
     useEffect(() => {
-        console.log("updating cart...")
         window.sessionStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
     }, [shoppingCart]);
 
     return (
-        <ShoppingCartContext.Provider value={{ shoppingCart, setShoppingCart }}>
+        <ShoppingCartContext.Provider value={{ shoppingCart, totalCost, setShoppingCart, setTotalCost }}>
             <Routes>
                 <Route path="/" element={<ProductCatalog />} />
                 <Route path="/cart" element={<ShoppingCart />} />
