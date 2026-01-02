@@ -15,9 +15,9 @@ function CartCard (productInfo: Product) {
     const handleRemoveFromCart = (productId: number) => {
         const itemIndex = shoppingCart.findIndex(product => product.id === productId);
         if (itemIndex > -1) {
-            shoppingCart.splice(itemIndex, 1);
-            console.log("updatedCart: ", shoppingCart);
-            setShoppingCart(shoppingCart);
+            const updatedCart = [...shoppingCart];
+            updatedCart.splice(itemIndex, 1);
+            setShoppingCart(updatedCart);
             setQuantity(quantity - 1);
         }
     }

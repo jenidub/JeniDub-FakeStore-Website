@@ -4,7 +4,8 @@ import { useContext } from 'react';
 import { BsCart4 } from 'react-icons/bs';
 
 function MenuBar() {
-    const { shoppingCart, totalCost } = useContext(ShoppingCartContext);
+    const { shoppingCart } = useContext(ShoppingCartContext);
+    const totalCost = shoppingCart.reduce((total, product) => total + product.price, 0);
 
     return (
         <div>

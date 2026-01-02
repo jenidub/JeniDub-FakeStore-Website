@@ -5,7 +5,7 @@ import ShoppingCartContext from "../context/ShoppingCartContext";
 import CartCard from "./CartCard";
 
 function ShoppingCart () {
-    const { shoppingCart, totalCost } = useContext(ShoppingCartContext);
+    const { shoppingCart } = useContext(ShoppingCartContext);
     
     const productList = new Set();
     const uniqueProducts = shoppingCart.filter(product => {
@@ -13,6 +13,8 @@ function ShoppingCart () {
         productList.add(product.id);
         return !inList;
     });
+
+    const totalCost = shoppingCart.reduce((total, product) => total + product.price, 0);
 
     return(
         <>
