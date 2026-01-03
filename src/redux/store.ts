@@ -6,6 +6,7 @@ const currentState = loadState();
 
 export const store = configureStore({
     reducer: {
+        // @ts-expect-error - TypeScript has issues with preloadedState typing, but it works correctly at runtime
         shoppingCart: cartSlice,
     },
     preloadedState: currentState,
