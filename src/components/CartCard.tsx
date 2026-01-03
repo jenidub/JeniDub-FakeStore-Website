@@ -5,8 +5,8 @@ import { addToCart, removeFromCart } from "../redux/cartSlice";
 import type { Product } from "../redux/cartSlice";
 
 function CartCard (productInfo: Product) {
-    const { shoppingCart } = useSelector((state: RootState) => state.shoppingCart);    
-    const quantity = shoppingCart.filter(product => product.id === productInfo.id).length;
+    const { items } = useSelector((state: RootState) => state.shoppingCart);    
+    const quantity = items.filter(product => product.id === productInfo.id).length;
 
     const dispatch = useDispatch<AppDispatch>();
 

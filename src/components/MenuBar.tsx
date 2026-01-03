@@ -5,8 +5,8 @@ import type { RootState } from "../redux/store";
 import { useNavigate } from 'react-router-dom';
 
 function MenuBar() {
-    const { shoppingCart } = useSelector((state: RootState) => state.shoppingCart);
-    const totalCost = shoppingCart.reduce((total, product) => total + product.price, 0);
+    const { items } = useSelector((state: RootState) => state.shoppingCart);
+    const totalCost = items.reduce((total, product) => total + product.price, 0);
     const navigate = useNavigate();
 
     return (
@@ -25,7 +25,7 @@ function MenuBar() {
                             <BsCart4 size={30} style={{ color: 'white', marginRight: "10px", }} />
                         </Nav.Link>
                         <Navbar.Text>
-                            <span>{shoppingCart.length} Items | ${totalCost.toFixed(2)}</span>
+                            <span>{items.length} Items | ${totalCost.toFixed(2)}</span>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>

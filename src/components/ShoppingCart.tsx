@@ -8,7 +8,7 @@ import Checkout from "./Checkout";
 import { checkout } from "../redux/cartSlice";
 
 function ShoppingCart () {
-    const { shoppingCart } = useSelector((state: RootState) => state.shoppingCart);
+    const { items } = useSelector((state: RootState) => state.shoppingCart);
     
     const dispatch = useDispatch<AppDispatch>();
 
@@ -21,13 +21,13 @@ function ShoppingCart () {
     const handleShow = () => setShow(true);
 
     const productList = new Set();
-    const uniqueProducts = shoppingCart.filter(product => {
+    const uniqueProducts = items.filter(product => {
         const inList = productList.has(product.id);
         productList.add(product.id);
         return !inList;
     });
 
-    const totalCost = shoppingCart.reduce((total, product) => total + product.price, 0);
+    const totalCost = items.reduce((total, product) => total + product.price, 0);
 
     return(
         <>

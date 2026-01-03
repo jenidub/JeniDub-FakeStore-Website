@@ -11,22 +11,22 @@ export interface Product {
     quantity?: number,
 };
 
-interface ShoppingCartState {
-    shoppingCart: Product[];
+export interface ShoppingCartState {
+    items: Product[];
 }
 
 const initialState: ShoppingCartState = {
-    shoppingCart: [],
+    items: [],
 };
 
 const cartSlice = createSlice({
-    name: 'ShoppingCart',
+    name: 'shoppingCart',
     initialState,
     reducers: {
         addToCart: (state: ShoppingCartState, action: PayloadAction<Product>) => {
             const { id, title, price, description, category, image, quantity } = action.payload;
 
-            state.shoppingCart.push({
+            state.items.push({
                 id: id,
                 title: title,
                 price: price,
@@ -37,16 +37,16 @@ const cartSlice = createSlice({
             })
         },
         removeFromCart: (state: ShoppingCartState, action: PayloadAction<number>) => {
-            const itemIndex = state.shoppingCart.findIndex(product => product.id === action.payload);
+            const itemIndex = state.items.findIndex(product => product.id === action.payload);
             if (itemIndex > -1) {
-                const updatedCart = [...state.shoppingCart];
+                const updatedCart = [...state.items];
                 updatedCart.splice(itemIndex, 1);
                 console.log("updatedCart: ", updatedCart);
-                state.shoppingCart = updatedCart;
+                state.items = updatedCart;
             }
         },
         checkout: (state: ShoppingCartState)  => {
-            state.shoppingCart = [];
+            state.items = [];
         }
     },
 });
