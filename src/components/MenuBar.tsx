@@ -1,10 +1,10 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import ShoppingCartContext from '../context/ShoppingCartContext';
-import { useContext } from 'react';
 import { BsCart4 } from 'react-icons/bs';
+import { useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
 
 function MenuBar() {
-    const { shoppingCart } = useContext(ShoppingCartContext);
+    const { shoppingCart } = useSelector((state: RootState) => state.shoppingCart);
     const totalCost = shoppingCart.reduce((total, product) => total + product.price, 0);
 
     return (

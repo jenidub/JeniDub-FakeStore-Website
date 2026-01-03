@@ -1,11 +1,12 @@
-import { useContext } from "react";
 import { Container, Row } from "react-bootstrap";
 import MenuBar from "./MenuBar";
-import ShoppingCartContext from "../context/ShoppingCartContext";
+import { useSelector } from "react-redux";
+import type { RootState } from "../redux/store";
 import CartCard from "./CartCard";
 
 function ShoppingCart () {
-    const { shoppingCart } = useContext(ShoppingCartContext);
+    const { shoppingCart } = useSelector((state: RootState) => state.shoppingCart);
+    console.log("current cart:   ", shoppingCart);
     
     const productList = new Set();
     const uniqueProducts = shoppingCart.filter(product => {

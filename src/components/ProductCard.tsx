@@ -1,26 +1,28 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Card, Button, Stack } from "react-bootstrap";
-import ShoppingCartContext from "../context/ShoppingCartContext";
-import type { Product } from "../types/Product";
+import type { Product } from "../redux/cartSlice";
+
+// import ShoppingCartContext from "../context/ShoppingCartContext";
+// import type { Product } from "../types/Product";
+
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState, AppDispatch } from "../redux/store";
+import { addToCart, removeFromCart } from "../redux/cartSlice";
 
 function ProductCard (productInfo: Product) {
-    const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
+    const { shoppingCart } = useSelector((state: RootState) => state.shoppingCart);
     const [ quantity, setQuantity ] = useState(shoppingCart.filter(product => product.id === productInfo.id).length || 0);
+    
+    const dispatch = useDispatch<AppDispatch>();
 
-    const handleAddToCart = (productInfo: Product) => {
-        setShoppingCart([...shoppingCart, productInfo]);
+    const handleAddToCart = (newProduct: Product) => {
+        dispatch(addToCart(newProduct));
         setQuantity(quantity + 1);
     }
 
     const handleRemoveFromCart = (productId: number) => {
-        const itemIndex = shoppingCart.findIndex(product => product.id === productId);
-        if (itemIndex > -1) {
-            const updatedCart = [...shoppingCart];
-            updatedCart.splice(itemIndex, 1);
-            console.log("updatedCart: ", updatedCart);
-            setShoppingCart(updatedCart);
-            setQuantity(quantity - 1);
-        }
+        dispatch(removeFromCart(productId));
+        setQuantity(quantity - 1);
     }
 
     return (
