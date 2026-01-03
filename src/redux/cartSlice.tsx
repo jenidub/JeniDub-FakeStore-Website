@@ -45,10 +45,13 @@ const cartSlice = createSlice({
                 state.shoppingCart = updatedCart;
             }
         },
+        checkout: (state: ShoppingCartState)  => {
+            state.shoppingCart = [];
+        }
     },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, checkout } = cartSlice.actions;
 export default cartSlice.reducer;
 
 // addToCart - adds a product to cart or increases quantity if it already exists

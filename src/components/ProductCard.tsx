@@ -1,28 +1,21 @@
-import { useState } from "react";
 import { Card, Button, Stack } from "react-bootstrap";
 import type { Product } from "../redux/cartSlice";
-
-// import ShoppingCartContext from "../context/ShoppingCartContext";
-// import type { Product } from "../types/Product";
-
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "../redux/store";
 import { addToCart, removeFromCart } from "../redux/cartSlice";
 
 function ProductCard (productInfo: Product) {
     const { shoppingCart } = useSelector((state: RootState) => state.shoppingCart);
-    const [ quantity, setQuantity ] = useState(shoppingCart.filter(product => product.id === productInfo.id).length || 0);
+    const quantity = shoppingCart.filter(product => product.id === productInfo.id).length;
     
     const dispatch = useDispatch<AppDispatch>();
 
     const handleAddToCart = (newProduct: Product) => {
         dispatch(addToCart(newProduct));
-        setQuantity(quantity + 1);
     }
 
     const handleRemoveFromCart = (productId: number) => {
         dispatch(removeFromCart(productId));
-        setQuantity(quantity - 1);
     }
 
     return (

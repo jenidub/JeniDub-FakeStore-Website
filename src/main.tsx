@@ -12,11 +12,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css'; // Add this line
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
-    <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-            <Provider store={store}>
+    <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
                 <App />
-            </Provider>
-        </BrowserRouter>
-    </QueryClientProvider>
+            </BrowserRouter>
+        </QueryClientProvider>
+    </Provider>
+
 );

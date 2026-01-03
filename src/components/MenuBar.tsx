@@ -2,20 +2,22 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BsCart4 } from 'react-icons/bs';
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
+import { useNavigate } from 'react-router-dom';
 
 function MenuBar() {
     const { shoppingCart } = useSelector((state: RootState) => state.shoppingCart);
     const totalCost = shoppingCart.reduce((total, product) => total + product.price, 0);
+    const navigate = useNavigate();
 
     return (
         <div>
             <Navbar bg="dark" data-bs-theme="dark" expand="lg" className="justify-content-between mb-5">
                 <Container>
-                    <Navbar.Brand href="#home">The Jeni Dub Store</Navbar.Brand>
+                    <Navbar.Brand onClick={() => navigate('/')}>The Jeni Dub Store</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Catalog</Nav.Link>
-                        <Nav.Link href="/cart">Shopping Cart</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/')}>Catalog</Nav.Link>
+                        <Nav.Link onClick={() => navigate('/cart')}>Shopping Cart</Nav.Link>
                     </Nav>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
