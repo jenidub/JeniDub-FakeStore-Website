@@ -12,7 +12,6 @@ function ShoppingCart () {
     
     const dispatch = useDispatch<AppDispatch>();
 
-    
     const [show, setShow] = useState(false);
     const handleClose = () => {
         dispatch(checkout());

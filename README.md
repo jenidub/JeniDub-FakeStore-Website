@@ -1,73 +1,116 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# The JeniDub Store 🛍️
 
-Currently, two official plugins are available:
+A modern, full-featured e-commerce shopping cart application built with React, TypeScript, and Redux Toolkit. This project demonstrates advanced state management, persistent storage, and integration with external APIs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+-   **Product Catalog**: Browse products fetched from the Fake Store API
+-   **Category Filtering**: Filter products by category for easy navigation
+-   **Shopping Cart Management**: Add, remove, and adjust item quantities
+-   **Persistent Storage**: Cart state persists across browser sessions using localStorage
+-   **Real-time Updates**: Cart totals and item counts update instantly
+-   **Responsive Design**: Built with React Bootstrap for mobile-friendly UI
+-   **Checkout Flow**: Complete purchase workflow with modal confirmation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+**Core:**
+-   React 19.2.0
+-   TypeScript 5.9.3
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**State Management:**
+-   Redux Toolkit 2.11.2
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Data Fetching:**
+-   TanStack React Query 5.90.12
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**UI & Styling:**
+-   React Bootstrap 2.10.10
+-   React Icons 5.5.0
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Routing:**
+-   React Router DOM 7.11.0
+
+## 📦 Installation
+
+1.  **Clone the repository:**
+```bash
+git clone <your-repo-url>
+cd fake-store-app
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.  **Install dependencies:**
+```bash
+npm install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+
+3.  **Start the development server:**
+```bash
+npm run dev
+
+```
+
+## 🏗️ Project Structure
+
+```
+src/
+├── components/
+│   ├── CartCard.tsx          # Individual cart item component
+│   ├── Checkout.tsx          # Checkout modal
+│   ├── MenuBar.tsx           # Navigation bar with cart summary
+│   ├── ProductCard.tsx       # Product display card
+│   ├── ProductCatalog.tsx    # Main catalog page
+│   └── ShoppingCart.tsx      # Shopping cart page
+├── redux/
+│   ├── cartSlice.tsx         # Redux cart state & actions
+│   ├── storage.tsx           # localStorage utilities
+│   └── store.ts              # Redux store configuration
+├── types/
+│   └── Product.ts            # TypeScript interfaces
+├── App.tsx                   # Main app component with routing
+└── main.tsx                  # Application entry point
+
+```
+
+## 🔑 Key Functionality
+
+### Redux State Management
+
+The application uses Redux Toolkit for centralized state management with three main actions:
+
+-   `addToCart`: Adds products to the shopping cart
+-   `removeFromCart`: Removes individual items
+-   `checkout`: Clears the cart after purchase
+
+### Persistent Storage
+
+Cart data is automatically saved to localStorage and restored on page reload, ensuring users don't lose their selections between sessions.
+
+### Data Fetching
+React Query manages API calls to the Fake Store API, providing:
+-   Automatic caching
+-   Loading states
+-   Error handling
+
+## 🐛 Known Issues
+-   Minor TypeScript configuration warning in `store.ts` (suppressed with `@ts-expect-error` - functionality works correctly)
+
+## 🎓 Learning Objectives
+This project demonstrates:
+-   ✅ Redux Toolkit state management patterns
+-   ✅ TypeScript integration with React
+-   ✅ React Query for API data fetching
+-   ✅ localStorage for state persistence
+-   ✅ React Router for SPA navigation
+-   ✅ Component composition and reusability
+-   ✅ Modern React patterns (hooks, functional components)
+
+## 📄 License
+This project is part of the Coding Temple Front End Specialization coursework.
+
+----------
+
+**Developed by Jeni** | _Coding Temple Front End Specialization - January 2026_
