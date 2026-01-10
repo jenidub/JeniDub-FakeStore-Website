@@ -75,7 +75,7 @@ function ProductCard (productInfo: Product) {
                     )} */}
                 </p>
             </div>
-            <div style={{ flex: isExpanded ? "0 1 auto" : 1, marginBottom: "0.5rem", }}>
+            <div style={{ flex: isExpanded ? "0 1 auto" : 1, margin: "10px auto", }}>
                 {quantity <= 0 ? 
                     (
                         <Button onClick={() => handleAddToCart(productInfo)}>
@@ -84,7 +84,7 @@ function ProductCard (productInfo: Product) {
                     )
                     :
                     (
-                        <Stack direction="horizontal" gap={2}>
+                        <Stack direction="horizontal" gap={4}>
                             <Button onClick={() => handleRemoveFromCart(productInfo.id)}>-</Button>
                             <span>Quantity in Cart: {quantity}</span>
                             <Button onClick={() => handleAddToCart(productInfo)}>+</Button>
