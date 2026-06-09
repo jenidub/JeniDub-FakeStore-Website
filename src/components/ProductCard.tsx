@@ -12,7 +12,6 @@ function ProductCard (productInfo: Product) {
     // const handleShow = () => setShow(true);
     // const handleClose= () => setShow(false);
 
-
     const { items } = useSelector((state: RootState) => state.shoppingCart);
     const quantity = items.filter(product => product.id === productInfo.id).length;
     
