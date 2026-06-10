@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
+            <BrowserRouter basename="/JeniDub-FakeStore-Website">
                 <App />
             </BrowserRouter>
         </QueryClientProvider>
